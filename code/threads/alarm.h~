@@ -48,7 +48,7 @@ class Alarm : public CallBackObj {
     void CallBack();		// called when the hardware
 				// timer generates an interrupt
 
-	std::vector<SleepThread> sleepList;		// sleeping thread list
+	std::vector<SleepThread> list;		// sleeping thread list
 	void addList(Thread* t, long long int time);	// add thread into sleep list
 	void checkIsWake();	// check if there are any thread will wake up
 	void wakeThread(Thread* t);	// wake up a thread

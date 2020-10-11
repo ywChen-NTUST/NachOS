@@ -139,13 +139,13 @@ PrintInt:
 	.end    PrintInt
 
 /* hw1 system call */
-	.globl	Sleep			// global entry
-	.ent	Sleep			// entry
+	.globl	WaitUntil		// global entry
+	.ent	WaitUntil		// entry
 Sleep:					// label
 	addiu	$2,$0,SC_Sleep		// SC_Sleep -> v0
 	syscall				// syscall
 	j	$31			// return
-	.end	Sleep		// end entry
+	.end	WaitUntil		// end entry
 
 /* dummy function to keep gcc happy */
         .globl  __main

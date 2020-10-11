@@ -71,7 +71,7 @@ ExceptionHandler(ExceptionType which)
 			val = kernel-> machine-> ReadRegister(4);	//read parameter a0
 			cout << "Waiting..." << endl;
 			kernel-> alarm -> WaitUntil(val);		//wait for val tick
-			cout << "Waiting " << val << " ticks complete" << endl;
+			cout << "Waiting " << val << "ticks complete" << endl;
 			cout << endl;
 			return;
 

@@ -130,7 +130,7 @@ void ThreadYield();
 
 void PrintInt(int number);	//my System Call
 
-void Sleep(int tick);	// hw1 syscall call
+void Sleep(int ns);	// hw1 syscall call
 
 #endif /* IN_ASM */
 

@@ -1,0 +1,11 @@
+#include "syscall.h"
+
+main()
+{
+	int i;
+	for(i=0; i<5; i++)
+	{
+		PrintInt(i);
+		Sleep(2000000);	//ns
+	}
+}

@@ -11,6 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
+#include<iostream>
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -87,6 +88,8 @@ void Alarm::addList(Thread* t, long long int time)
 void Alarm::checkIsWake()
 {
 	IntStatus lastLevel = kernel->interrupt->SetLevel(IntOff);	// interrupt off
+	
+	std::cout << "1 tick pass" << std::endl;
 
 	int i;
 
