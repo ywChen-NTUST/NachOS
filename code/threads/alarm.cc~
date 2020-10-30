@@ -11,7 +11,6 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-#include<iostream>
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -53,12 +52,20 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
     
+<<<<<<< HEAD
     if (status == IdleMode && sleepList.empty()) {	// is it time to quit?
+=======
+    kernel->currentThread->setPriority(kernel->currentThread->getPriority() - 1);
+    if (status == IdleMode) {	// is it time to quit?
+>>>>>>> 1c9dd52c490ad28c8614679e8ccc64282d65f46f
         if (!interrupt->AnyFutureInterrupts()) {
 	    timer->Disable();	// turn off the timer
 	}
     } else {			// there's someone to preempt
-	interrupt->YieldOnReturn();
+	if(kernel->scheduler->getSchedulerType() == RR ||
+            kernel->scheduler->getSchedulerType() == Priority ) {
+		interrupt->YieldOnReturn();
+	}
     }
 
 	checkIsWake();
@@ -88,8 +95,6 @@ void Alarm::addList(Thread* t, long long int time)
 void Alarm::checkIsWake()
 {
 	IntStatus lastLevel = kernel->interrupt->SetLevel(IntOff);	// interrupt off
-	
-	std::cout << "1 tick pass" << std::endl;
 
 	int i;
 
