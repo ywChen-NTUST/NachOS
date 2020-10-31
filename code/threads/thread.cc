@@ -38,6 +38,10 @@ Thread::Thread(char* threadName)
     name = threadName;
     stackTop = NULL;
     stack = NULL;
+    // hw2
+    burstTime = rand()%100+1;
+    cout << "Thread burst time: " << burstTime << " is created!" << endl;
+    // end of hw2
     status = JUST_CREATED;
     for (int i = 0; i < MachineStateSize; i++) {
 	machineState[i] = NULL;		// not strictly necessary, since
@@ -446,4 +450,3 @@ Thread::SelfTest()
     }
     kernel->currentThread->Yield();
 }
-

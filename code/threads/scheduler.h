@@ -47,8 +47,11 @@ class Scheduler {
     
   private:
 	SchedulerType schedulerType;
-	List<Thread *> *readyList;	// queue of threads that are ready to run,
+	// hw2
+        SortedList<Thread *> *readyList;
+	//List<Thread *> *readyList;	// queue of threads that are ready to run,
 					// but not running
+	// end of hw2
 	Thread *toBeDestroyed;		// finishing thread to be destroyed
     					// by the next thread that runs
 };

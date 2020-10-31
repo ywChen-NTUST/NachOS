@@ -31,7 +31,15 @@ int PriorityCompare(Thread *a, Thread *b) {
         return 0;
     return a->getPriority() > b->getPriority() ? 1 : -1;
 }
-
+//hw2
+int compareSJF(Thread *thread1, Thread *thread2)
+{
+    if(thread1->getBurstTime() < thread2->getBurstTime())
+	return -1;
+    else
+	return 0;
+}
+//end of hw2
 //----------------------------------------------------------------------
 // Scheduler::Scheduler
 // 	Initialize the list of ready but not running threads.
@@ -48,10 +56,11 @@ Scheduler::Scheduler(SchedulerType type)
 	schedulerType = type;
 	switch(schedulerType) {
     	case RR:
-        	readyList = new List<Thread *>;
+        	//readyList = new List<Thread *>;
         	break;
+	// hw2
     	case SJF:
-		/* todo */
+		readyList = new SortedList<Thread *>(compareSJF);
         	break;
     	case Priority:
 		readyList = new SortedList<Thread *>(PriorityCompare);
@@ -59,6 +68,7 @@ Scheduler::Scheduler(SchedulerType type)
     	case FIFO:
 		/* todo */
 		break;
+	// end of hw2
    	}
 	toBeDestroyed = NULL;
 } 
@@ -88,7 +98,22 @@ Scheduler::ReadyToRun (Thread *thread)
     DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
     
     thread->setStatus(READY);
-    readyList->Append(thread);
+    // hw2
+    switch(schedulerType)
+    {
+	case SJF:
+	    readyList->Insert(thread);
+	    cout << thread->getBurstTime() << endl;
+	    cout << "Thread's name: " << thread->getName() << " BurstTime: " << thread->getBurstTime() << endl;
+	    break;
+        case Priority:
+	    break;
+        default:
+	    readyList->Insert(thread);
+	    break;
+    }
+    // end of hw2
+    //readyList->Append(thread);
 }
 
 //----------------------------------------------------------------------
@@ -132,9 +157,20 @@ void
 Scheduler::Run (Thread *nextThread, bool finishing)
 {
     Thread *oldThread = kernel->currentThread;
- 
+    // hw2
 //	cout << "Current Thread" <<oldThread->getName() << "    Next Thread"<<nextThread->getName()<<endl;
-   
+    switch(schedulerType)
+    {
+        case SJF:
+	    cout << "Current Thread BurstTime: " << oldThread->getBurstTime() << " Next Thread BurstTime: " << nextThread->getBurstTime() << endl;
+	    break;
+	case Priority:
+	    /* todo*/
+	    break;
+	default:
+	    break;
+    }
+    //end of hw2
     ASSERT(kernel->interrupt->getLevel() == IntOff);
 
     if (finishing) {	// mark that we need to delete current thread
