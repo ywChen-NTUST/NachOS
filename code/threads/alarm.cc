@@ -51,10 +51,8 @@ Alarm::CallBack()
 {
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
-    
-    if(kernel->scheduler->getSchedulerType() == Priority && kernel->scheduler->getNonStarvePRI()) {
-        kernel->currentThread->setPriority(kernel->currentThread->getPriority() + 1); // lower the priority of current thread
-    }
+
+    //kernel->currentThread->setPriority(kernel->currentThread->getPriority() + 1); // lower the priority of current thread
     
     if (status == IdleMode && sleepList.empty()) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
@@ -62,13 +60,8 @@ Alarm::CallBack()
 	}
     } else {			// there's someone to preempt
 
-	Thread* t;
-	if(kernel->scheduler->getSchedulerType() == RR ||
-            (kernel->scheduler->getSchedulerType() == Priority && 
-		(t = kernel->scheduler->getFrontThreadInfo()) != NULL && t->getPriority() < kernel->currentThread->getPriority() 
-	    ) 
-	) 
-	{
+	if(kernel->scheduler->getSchedulerType() == RR /* ||
+            kernel->scheduler->getSchedulerType() == Priority */ ) {
 		interrupt->YieldOnReturn();
 	}
     }

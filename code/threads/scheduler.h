@@ -43,17 +43,17 @@ class Scheduler {
     	void setSchedulerType(SchedulerType t) {schedulerType = t;}
 	SchedulerType getSchedulerType() {return schedulerType;}
 
-	void setNonStarvePRI(bool isNonStarve) {nonStarvePRI = isNonStarve;}
-	bool getNonStarvePRI() {return nonStarvePRI;}
+	//void setNonStarvePRI(bool isNonStarve) {nonStarvePRI = isNonStarve;}
+	//bool getNonStarvePRI() {return nonStarvePRI;}
 
-	Thread* getFrontThreadInfo() {return readyList->IsEmpty()? NULL : readyList->Front();}	// get the info of the front element
+	//Thread* getFrontThreadInfo() {return readyList->IsEmpty()? NULL : readyList->Front();}	// get the info of the front element
 									// return obj is better for read-only
 
     // SelfTest for scheduler is implemented in class Thread
     
   private:
 	SchedulerType schedulerType;
-	bool nonStarvePRI;		// if scheduler type == non-starvation  priority ?
+	//bool nonStarvePRI;		// if scheduler type == non-starvation  priority ?
 	// hw2
         List<Thread *> *readyList;
 	//List<Thread *> *readyList;	// queue of threads that are ready to run,

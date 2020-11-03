@@ -22,7 +22,7 @@
 #include "synch.h"
 #include "sysdep.h"
 
-#include "scheduler.h"
+//#include "scheduler.h"
 
 // this is put at the top of the execution stack, for detecting stack overflows
 const int STACK_FENCEPOST = 0xdedbeef;
