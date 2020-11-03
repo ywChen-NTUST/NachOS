@@ -54,6 +54,7 @@ Scheduler::Scheduler()
 Scheduler::Scheduler(SchedulerType type)
 {
 	schedulerType = type;
+	isPreemptPRI = false;
 	switch(schedulerType) {
     	case RR:
         	readyList = new List<Thread *>;

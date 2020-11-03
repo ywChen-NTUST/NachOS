@@ -43,10 +43,14 @@ class Scheduler {
     	void setSchedulerType(SchedulerType t) {schedulerType = t;}
 	SchedulerType getSchedulerType() {return schedulerType;}
 
+	void setIsPreemptPRI(bool isPreempt) {isPreemptPRI = isPreempt;}
+	bool getIsPreemptPRI() {return isPreemptPRI;}
+
     // SelfTest for scheduler is implemented in class Thread
     
   private:
 	SchedulerType schedulerType;
+	bool isPreemptPRI;		// if scheduler type == preempted priority ?
 	// hw2
         List<Thread *> *readyList;
 	//List<Thread *> *readyList;	// queue of threads that are ready to run,
