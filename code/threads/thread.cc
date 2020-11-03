@@ -49,7 +49,7 @@ Thread::Thread(char* threadName)
 
     if(kernel->scheduler->getSchedulerType() == SJF)
     {
-        cout << "Thread " << threadName << " burst time: " << burstTime << " is created!" << endl;
+        cout << "Thread burst time: " << burstTime << " is created!" << endl;
     }
     else if(kernel->scheduler->getSchedulerType() == Priority)
     {
