@@ -26,7 +26,7 @@ ThreadedKernel::ThreadedKernel(int argc, char **argv)
 {
     randomSlice = FALSE; 
     type = RR;
-    preemptPRI = false;
+    nonStarvePRI = false;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-rs") == 0) {
@@ -43,8 +43,8 @@ ThreadedKernel::ThreadedKernel(int argc, char **argv)
             type = FIFO;
         } else if (strcmp(argv[i], "PRIORITY") == 0) {
             type = Priority;
-	} else if (strcmp(argv[i], "--preempt") == 0) { // preempted priority
-	    preemptPRI = true;
+	} else if (strcmp(argv[i], "--no-starve") == 0) { // preempted priority
+	    nonStarvePRI = true;
         } else if (strcmp(argv[i], "SJF") == 0) {
             type = SJF;
         }
@@ -66,11 +66,11 @@ ThreadedKernel::Initialize()
     scheduler = new Scheduler(type);	// initialize the ready queue
     alarm = new Alarm(randomSlice);	// start up time slicing
 
-    if(type == Priority && preemptPRI) {  // set isPreemptPRI
-        scheduler->setIsPreemptPRI(true);
+    if(type == Priority && nonStarvePRI) {  // set isPreemptPRI
+        scheduler->setNonStarvePRI(true);
     }
     else {
-        scheduler->setIsPreemptPRI(false);
+        scheduler->setNonStarvePRI(false);
     }
 
     // We didn't explicitly allocate the current thread we are running in.

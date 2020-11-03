@@ -45,7 +45,7 @@ class ThreadedKernel {
   private:
     bool randomSlice;		// enable pseudo-random time slicing
     SchedulerType type;
-    bool preemptPRI;		// scheduler type = preempt priority
+    bool nonStarvePRI;		// scheduler type = no starvation priority
 };
 
 
