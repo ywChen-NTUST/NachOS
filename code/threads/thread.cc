@@ -468,5 +468,5 @@ Thread::SelfTest()
     }
 
     kernel->interrupt->SetLevel(oldLevel); // resume interrupt
-    kernel->currentThread->Yield();
+    //kernel->currentThread->Yield();
 }
