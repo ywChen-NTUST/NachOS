@@ -40,8 +40,12 @@ class UserProgKernel : public ThreadedKernel {
   private:
     bool debugUserProg;		// single step user program
 	Thread* t[10];
+	int	pri[10];	// user defined priority
+	bool	setPri[10];	// set priority or not
 	char*	execfile[10];
 	int	execfileNum;
+
+	int stoi(char* str);
 };
 
 #endif //USERKERNEL_H

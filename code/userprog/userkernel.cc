@@ -22,14 +22,27 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
 {
     debugUserProg = FALSE;
 	execfileNum=0;
+    for(int i=0; i<10; i++) { // initialize
+        setPri[i] = false;
+    }
+
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-s") == 0) {
 	    debugUserProg = TRUE;
 	}
 	else if (strcmp(argv[i], "-e") == 0) {
 		execfile[++execfileNum]= argv[++i];
+		
+		if ((i+1) < argc && strcmp(argv[i+1], "-pri") == 0) {
+			i += 1;
+
+			if ((i+1) < argc) {
+				pri[execfileNum] = stoi(argv[++i]);
+				setPri[execfileNum] = true;
+			}
+		}
 	}
-    	 else if (strcmp(argv[i], "-u") == 0) {
+    	else if (strcmp(argv[i], "-u") == 0) {
 		cout << "===========The following argument is defined in userkernel.cc" << endl;
 		cout << "Partial usage: nachos [-s]\n";
 		cout << "Partial usage: nachos [-u]" << endl;
@@ -97,6 +110,11 @@ UserProgKernel::Run()
 		{
 		t[n] = new Thread(execfile[n]);
 		t[n]->space = new AddrSpace();
+
+		if(setPri[n]) {
+			t[n]->setPriority(pri[n]);
+		}
+
 		t[n]->Fork((VoidFunctionPtr) &ForkExecute, (void *)t[n]);
 		cout << "Thread " << execfile[n] << " is executing." << endl;
 		}
@@ -150,4 +168,27 @@ UserProgKernel::SelfTest() {
 
 
 //	cout << "This is self test message from UserProgKernel\n" ;
+}
+
+int UserProgKernel::stoi(char* str) {
+	int output=0;
+	int index = 0;
+	bool positive = true;
+	
+	while(str[index] != '\0') {
+		if (index == 0 && str[index] == '-') {
+			positive = false;
+		}
+		else if(str[index] >= '0' && str[index] <= '9') {
+			output *= 10;
+			output += str[index] - '0';
+		}
+		index++;
+	}
+	
+	if(not positive) {
+		output = 0 - output;
+	}
+
+	return output;
 }

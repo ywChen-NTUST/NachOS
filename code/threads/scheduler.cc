@@ -56,7 +56,7 @@ Scheduler::Scheduler(SchedulerType type)
 	schedulerType = type;
 	switch(schedulerType) {
     	case RR:
-        	//readyList = new List<Thread *>;
+        	readyList = new List<Thread *>;
         	break;
 	// hw2
     	case SJF:
@@ -101,15 +101,20 @@ Scheduler::ReadyToRun (Thread *thread)
     // hw2
     switch(schedulerType)
     {
+        case RR:
+            readyList->Append(thread);
+            break;
 	case SJF:
-	    readyList->Insert(thread);
+	    readyList->Append(thread);
 	    cout << thread->getBurstTime() << endl;
 	    cout << "Thread's name: " << thread->getName() << " BurstTime: " << thread->getBurstTime() << endl;
 	    break;
         case Priority:
+            readyList->Append(thread);
+            DEBUG(dbgThread, "Thread's name: " << thread->getName() << " Priority: " << thread->getPriority() << " In readyList!");
 	    break;
         default:
-	    readyList->Insert(thread);
+	    readyList->Append(thread);
 	    break;
     }
     // end of hw2

@@ -22,6 +22,8 @@
 #include "synch.h"
 #include "sysdep.h"
 
+#include "scheduler.h"
+
 // this is put at the top of the execution stack, for detecting stack overflows
 const int STACK_FENCEPOST = 0xdedbeef;
 
@@ -39,8 +41,21 @@ Thread::Thread(char* threadName)
     stackTop = NULL;
     stack = NULL;
     // hw2
+
+    // initialize
+    // just in case
     burstTime = rand()%100+1;
-    cout << "Thread burst time: " << burstTime << " is created!" << endl;
+    priority = rand()%100;
+
+    if(kernel->scheduler->getSchedulerType() == SJF)
+    {
+        cout << "Thread " << threadName << " burst time: " << burstTime << " is created!" << endl;
+    }
+    else if(kernel->scheduler->getSchedulerType() == Priority)
+    {
+        DEBUG(dbgThread, "Thread " << threadName << " priority: " << priority << " is created!");
+    }
+
     // end of hw2
     status = JUST_CREATED;
     for (int i = 0; i < MachineStateSize; i++) {
@@ -434,6 +449,9 @@ SimpleThread()
 void
 Thread::SelfTest()
 {
+
+    IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff); // disable interrupt
+
     DEBUG(dbgThread, "Entering Thread::SelfTest");
     
     const int number 	 = 3;
@@ -448,5 +466,7 @@ Thread::SelfTest()
         t->setBurstTime(burst[i]);
         t->Fork((VoidFunctionPtr) SimpleThread, (void *)NULL);
     }
+
+    kernel->interrupt->SetLevel(oldLevel); // resume interrupt
     kernel->currentThread->Yield();
 }

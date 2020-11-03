@@ -48,7 +48,7 @@ class Scheduler {
   private:
 	SchedulerType schedulerType;
 	// hw2
-        SortedList<Thread *> *readyList;
+        List<Thread *> *readyList;
 	//List<Thread *> *readyList;	// queue of threads that are ready to run,
 					// but not running
 	// end of hw2
