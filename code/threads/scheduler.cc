@@ -67,7 +67,7 @@ Scheduler::Scheduler(SchedulerType type)
 		readyList = new SortedList<Thread *>(PriorityCompare);
         	break;
     	case FIFO:
-		/* todo */
+		readyList = new List<Thread *>;
 		break;
 	// end of hw2
    	}
@@ -114,6 +114,10 @@ Scheduler::ReadyToRun (Thread *thread)
             readyList->Append(thread);
             DEBUG(dbgThread, "Thread's name: " << thread->getName() << " Priority: " << thread->getPriority() << " In readyList!");
 	    break;
+	case FIFO:
+            readyList->Append(thread);
+            DEBUG(dbgThread, "Thread's name: " << thread->getName() << " in readyList!");
+            break;
         default:
 	    readyList->Append(thread);
 	    break;
