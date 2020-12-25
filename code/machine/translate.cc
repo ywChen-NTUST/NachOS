@@ -212,6 +212,9 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
 	    return AddressErrorException;
 	} else if (!pageTable[vpn].valid) {
             /* 		Add Page fault code here		*/
+
+            /*DEBUG(dbgAddr, "Invalid TLB entry for this virtual page! (PTE still exist)");
+            return PageFaultException;*/
 	}
 	entry = &pageTable[vpn];
     } else {
