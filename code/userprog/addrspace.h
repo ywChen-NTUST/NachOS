@@ -32,8 +32,8 @@ class AddrSpace {
     void SaveState();			// Save/restore address space-specific
     void RestoreState();		// info on a context switch 
 
-	// hw4
-	int ID;
+    // hw4
+    int ID;
 
   private:
     TranslationEntry *pageTable;	// Assume linear page table translation
@@ -47,8 +47,8 @@ class AddrSpace {
     void InitRegisters();		// Initialize user-level CPU registers,
 					// before jumping to user code
 	
-	// hw4
-	bool pt_is_load;
+    // hw4
+    bool pt_is_load;
 
 };
 

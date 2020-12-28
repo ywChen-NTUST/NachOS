@@ -77,8 +77,8 @@ Machine::Machine(bool debug)
     singleStep = debug;
     CheckEndian();
 
-	// hw4
-	fifo = 0;	//initialize
+    // hw4
+    fifo = 0;	//initialize
 }
 
 //----------------------------------------------------------------------

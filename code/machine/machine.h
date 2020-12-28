@@ -52,9 +52,9 @@ enum ExceptionType { NoException,           // Everything ok!
 
 // hw4
 enum MemReplaceType {
-	MemFIFO,
-	MemLRU,
-	MemDefault		// default type
+    MemFIFO,
+    MemLRU,
+    MemDefault		// default type
 };
 
 // User program CPU state.  The full set of MIPS registers, plus a few
@@ -139,9 +139,9 @@ class Machine {
     TranslationEntry *pageTable;
     unsigned int pageTableSize;
     bool ReadMem(int addr, int size, int* value);
-	
-	// hw4
-	bool usedPhyPage[NumPhysPages];//record which the page in the main memory is used.
+    
+    // hw4
+    bool usedPhyPage[NumPhysPages];//record which the page in the main memory is used.
     bool usedvirPage[NumPhysPages];
     int  ID_num;
     int PhyPageName[NumPhysPages];
@@ -150,8 +150,8 @@ class Machine {
     int sector_number;//record which sector the disk is saving
     TranslationEntry *main_tab[NumPhysPages];
 
-	// hw4
-	static MemReplaceType memReplaceMode;	// memory replacement policy
+    // hw4
+    static MemReplaceType memReplaceMode;	// memory replacement policy
 	
   private:
 
@@ -192,8 +192,8 @@ class Machine {
     int runUntilTime;		// drop back into the debugger when simulated
 				// time reaches this value
 
-	// hw4
-	int fifo;	// for fifo replacement
+    // hw4
+    int fifo;	// for fifo replacement
 
  friend class Interrupt;		// calls DelayedLoad()    
 };

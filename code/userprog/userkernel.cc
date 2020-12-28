@@ -21,7 +21,7 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
 		: ThreadedKernel(argc, argv)
 {
     debugUserProg = FALSE;
-	execfileNum=0;
+    execfileNum=0;
     for(int i=0; i<10; i++) { // initialize
         setPri[i] = false;
     }
@@ -29,40 +29,40 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-s") == 0) {
 	    debugUserProg = TRUE;
-		}
-		else if (strcmp(argv[i], "-e") == 0) {
-			execfile[++execfileNum]= argv[++i];
-			
-			if ((i+1) < argc && strcmp(argv[i+1], "-pri") == 0) {
-				i += 1;
+	}
+	else if (strcmp(argv[i], "-e") == 0) {
+	    execfile[++execfileNum]= argv[++i];
+	    
+	    if ((i+1) < argc && strcmp(argv[i+1], "-pri") == 0) {
+	        i += 1;
 	
-				if ((i+1) < argc) {
-					pri[execfileNum] = stoi(argv[++i]);
-					setPri[execfileNum] = true;
-				}
-			}
+		if ((i+1) < argc) {
+		    pri[execfileNum] = stoi(argv[++i]);
+		    setPri[execfileNum] = true;
 		}
+	    }
+	}
     	else if (strcmp(argv[i], "-u") == 0) {
-			cout << "===========The following argument is defined in userkernel.cc" << endl;
-			cout << "Partial usage: nachos [-s]\n";
-			cout << "Partial usage: nachos [-u]" << endl;
-			cout << "Partial usage: nachos [-e] filename" << endl;
-		}
-		else if (strcmp(argv[i], "-h") == 0) {
-			cout << "argument 's' is for debugging. Machine status  will be printed " << endl;
-			cout << "argument 'e' is for execting file." << endl;
-			cout << "atgument 'u' will print all argument usage." << endl;
-			cout << "For example:" << endl;
-			cout << "	./nachos -s : Print machine status during the machine is on." << endl;
-			cout << "	./nachos -e file1 -e file2 : executing file1 and file2."  << endl;
-		}
-		// hw4
-		else if (strcmp(argv[i], "FIFO") == 0) {
-			memType = MemFIFO;
-		}
-		else if (strcmp(argv[i], "LRU") == 0) {
-			memType = MemLRU;
-		}
+	    cout << "===========The following argument is defined in userkernel.cc" << endl;
+	    cout << "Partial usage: nachos [-s]\n";
+	    cout << "Partial usage: nachos [-u]" << endl;
+            cout << "Partial usage: nachos [-e] filename" << endl;
+	}
+	else if (strcmp(argv[i], "-h") == 0) {
+	    cout << "argument 's' is for debugging. Machine status  will be printed " << endl;
+	    cout << "argument 'e' is for execting file." << endl;
+	    cout << "atgument 'u' will print all argument usage." << endl;
+	    cout << "For example:" << endl;
+	    cout << "	./nachos -s : Print machine status during the machine is on." << endl;
+	    cout << "	./nachos -e file1 -e file2 : executing file1 and file2."  << endl;
+	}
+	// hw4
+	else if (strcmp(argv[i], "FIFO") == 0) {
+	    memType = MemFIFO;
+	}
+	else if (strcmp(argv[i], "LRU") == 0) {
+	    memType = MemLRU;
+	}
     }
 }
 
@@ -79,9 +79,9 @@ UserProgKernel::Initialize()
     machine = new Machine(debugUserProg);
     fileSystem = new FileSystem();
 	
-	// hw4
+    // hw4
     vm_Disk = new SynchDisk("New Disk"); // to save the page which the main memoey don't have enough memory to save
-	Machine::memReplaceMode = memType;
+    Machine::memReplaceMode = memType;
 
 #ifdef FILESYS
     synchDisk = new SynchDisk("New SynchDisk");
