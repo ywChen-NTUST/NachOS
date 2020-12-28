@@ -29,16 +29,23 @@ class UserProgKernel : public ThreadedKernel {
 
     void SelfTest();		// test whether kernel is working
 
+	// hw4
+    SynchDisk *vm_Disk;
+
 // These are public for notational convenience.
     Machine *machine;
     FileSystem *fileSystem;
+
+	// hw4
+    bool debugUserProg;
+	MemReplaceType memType;
 
 #ifdef FILESYS
     SynchDisk *synchDisk;
 #endif // FILESYS
 
   private:
-    bool debugUserProg;		// single step user program
+    //bool debugUserProg;		// single step user program
 	Thread* t[10];
 	int	pri[10];	// user defined priority
 	bool	setPri[10];	// set priority or not

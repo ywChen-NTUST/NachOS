@@ -50,6 +50,13 @@ enum ExceptionType { NoException,           // Everything ok!
 		     NumExceptionTypes
 };
 
+// hw4
+enum MemReplaceType {
+	MemFIFO,
+	MemLRU,
+	MemDefault		// default type
+};
+
 // User program CPU state.  The full set of MIPS registers, plus a few
 // more because we need to be able to start/stop a user program between
 // any two instructions (thus we need to keep track of things like load
@@ -132,6 +139,20 @@ class Machine {
     TranslationEntry *pageTable;
     unsigned int pageTableSize;
     bool ReadMem(int addr, int size, int* value);
+	
+	// hw4
+	bool usedPhyPage[NumPhysPages];//record which the page in the main memory is used.
+    bool usedvirPage[NumPhysPages];
+    int  ID_num;
+    int PhyPageName[NumPhysPages];
+    int count[NumPhysPages]; //for lru
+    bool reference_bit[NumPhysPages];//for second chance algo.
+    int sector_number;//record which sector the disk is saving
+    TranslationEntry *main_tab[NumPhysPages];
+
+	// hw4
+	static MemReplaceType memReplaceMode;	// memory replacement policy
+	
   private:
 
 // Routines internal to the machine simulation -- DO NOT call these directly
@@ -170,6 +191,9 @@ class Machine {
 				// simulated instruction
     int runUntilTime;		// drop back into the debugger when simulated
 				// time reaches this value
+
+	// hw4
+	int fifo;	// for fifo replacement
 
  friend class Interrupt;		// calls DelayedLoad()    
 };

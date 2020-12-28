@@ -44,6 +44,9 @@ void CheckEndian()
 #endif
 }
 
+// static reference of memReplaceMode
+MemReplaceType Machine::memReplaceMode = MemDefault;
+
 //----------------------------------------------------------------------
 // Machine::Machine
 // 	Initialize the simulation of user program execution.
@@ -73,6 +76,9 @@ Machine::Machine(bool debug)
 
     singleStep = debug;
     CheckEndian();
+
+	// hw4
+	fifo = 0;	//initialize
 }
 
 //----------------------------------------------------------------------
