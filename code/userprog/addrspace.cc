@@ -184,7 +184,7 @@ AddrSpace::Load(char *fileName)
                 pageTable[i].dirty = FALSE;
 	        pageTable[i].readOnly = FALSE;
                 pageTable[i].ID =ID;
-                pageTable[i].count++; //for LRU,count+1 when save in memory 
+                //pageTable[i].count++; //for LRU,count+1 when save in memory 
                 executable->ReadAt(&(kernel->machine->mainMemory[j*PageSize]),PageSize, noffH.code.inFileAddr+(i*PageSize));  
             }
             //Use virtual memory when memory isn't enough
