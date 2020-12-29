@@ -61,6 +61,7 @@ AddrSpace::AddrSpace()
     ID = (kernel->machine->ID_num) + 1;
     kernel->machine->ID_num=kernel->machine->ID_num+1;    
 
+/*
     pageTable = new TranslationEntry[NumPhysPages];
     for (unsigned int i = 0; i < NumPhysPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
@@ -87,9 +88,10 @@ AddrSpace::AddrSpace()
 AddrSpace::~AddrSpace()
 {
     
-    for(int i = 0; i < numPages; i++)
-    AddrSpace::usedPhyPage[pageTable[i].physicalPage] = false;
-    delete pageTable;
+    /*for(int i = 0; i < numPages; i++)
+        AddrSpace::usedPhyPage[pageTable[i].physicalPage] = false;
+    */
+      delete pageTable;
 }
 
 
@@ -128,14 +130,14 @@ AddrSpace::Load(char *fileName)
     size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
 			+ UserStackSize;	// we need to increase the size
 						// to leave room for the stack
-    /**/numPages = divRoundUp(size, PageSize);
+    numPages = divRoundUp(size, PageSize);
     //	cout << "number of pages of " << fileName<< " is "<<numPages<<endl;
     
     // hw4
     pageTable = new TranslationEntry[numPages];
 
     size = numPages * PageSize;
-
+/*
     numPages = divRoundUp(size,PageSize);
     for(unsigned int i=0, j=0; i<numPages; i++){
         pageTable[i].virtualPage = i;
@@ -149,7 +151,7 @@ AddrSpace::Load(char *fileName)
         pageTable[i].readOnly = false;
     }
 
-    size = numPages * PageSize;/**/
+    size = numPages * PageSize;
 
     ASSERT(numPages <= NumPhysPages);		// check we're not trying
 						// to run anything too big --
@@ -157,7 +159,7 @@ AddrSpace::Load(char *fileName)
 						// virtual memory
 
     DEBUG(dbgAddr, "Initializing address space: " << numPages << ", " << size);
-
+*/
 // then, copy in the code and data segments into memory
     if (noffH.code.size > 0) {
         DEBUG(dbgAddr, "Initializing code segment.");
