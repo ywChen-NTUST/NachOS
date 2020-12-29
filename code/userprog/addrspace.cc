@@ -71,6 +71,8 @@ AddrSpace::AddrSpace()
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
 	pageTable[i].readOnly = FALSE;  
+
+	pageTable[i].count = 0;	// for LRU
     }
     
     // zero out the entire address space
