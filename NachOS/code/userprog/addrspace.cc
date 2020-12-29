@@ -61,7 +61,7 @@ AddrSpace::AddrSpace()
     ID = (kernel->machine->ID_num) + 1;
     kernel->machine->ID_num=kernel->machine->ID_num+1;    
 
-    pageTable = new TranslationEntry[NumPhysPages];
+/*    pageTable = new TranslationEntry[NumPhysPages];
     for (unsigned int i = 0; i < NumPhysPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
 	pageTable[i].physicalPage = i;
@@ -72,7 +72,7 @@ AddrSpace::AddrSpace()
 	pageTable[i].dirty = FALSE;
 	pageTable[i].readOnly = FALSE;  
     }
-    
+*/    
     // zero out the entire address space
 //    bzero(kernel->machine->mainMemory, MemorySize);
 }
@@ -134,7 +134,7 @@ AddrSpace::Load(char *fileName)
 
     size = numPages * PageSize;
 
-    numPages = divRoundUp(size,PageSize);
+/*    numPages = divRoundUp(size,PageSize);
     for(unsigned int i=0, j=0; i<numPages; i++){
         pageTable[i].virtualPage = i;
         while(j<NumPhysPages && AddrSpace::usedPhyPage[j] == true)
@@ -148,13 +148,13 @@ AddrSpace::Load(char *fileName)
     }
 
     size = numPages * PageSize;
-
-    ASSERT(numPages <= NumPhysPages);		// check we're not trying
+*/
+//    ASSERT(numPages <= NumPhysPages);		// check we're not trying
 						// to run anything too big --
 						// at least until we have
 						// virtual memory
 
-    DEBUG(dbgAddr, "Initializing address space: " << numPages << ", " << size);
+//    DEBUG(dbgAddr, "Initializing address space: " << numPages << ", " << size);
 
 // then, copy in the code and data segments into memory
     if (noffH.code.size > 0) {

@@ -22,10 +22,6 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
 {
     debugUserProg = FALSE;
     execfileNum=0;
-
-    // hw4
-    memType = MemDefault;
-
     for(int i=0; i<10; i++) { // initialize
         setPri[i] = false;
     }
@@ -59,13 +55,6 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
 	    cout << "For example:" << endl;
 	    cout << "	./nachos -s : Print machine status during the machine is on." << endl;
 	    cout << "	./nachos -e file1 -e file2 : executing file1 and file2."  << endl;
-	}
-	// hw4
-	else if (strcmp(argv[i], "FIFO") == 0) {
-	    memType = MemFIFO;
-	}
-	else if (strcmp(argv[i], "LRU") == 0) {
-	    memType = MemLRU;
 	}
     }
 }

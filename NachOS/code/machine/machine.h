@@ -50,13 +50,6 @@ enum ExceptionType { NoException,           // Everything ok!
 		     NumExceptionTypes
 };
 
-// hw4
-enum MemReplaceType {
-    MemFIFO,
-    MemLRU,
-    MemDefault		// default type
-};
-
 // User program CPU state.  The full set of MIPS registers, plus a few
 // more because we need to be able to start/stop a user program between
 // any two instructions (thus we need to keep track of things like load

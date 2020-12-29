@@ -24,7 +24,7 @@
 KernelType *kernel;
 Debug *debug;
 
-
+int mode = 1;
 //----------------------------------------------------------------------
 // Cleanup
 //	Delete kernel data structures; called when user hits "ctl-C".
