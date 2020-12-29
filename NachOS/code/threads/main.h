@@ -30,6 +30,5 @@ class ThreadedKernel;
 
 extern KernelType *kernel;
 extern Debug *debug;
-extern int mode;
 #endif //MAIN_H
 

@@ -241,11 +241,11 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
 	 	char *buf_1 = new char[PageSize];
 	        char *buf_2 = new char[PageSize]; 
 	        // FIFO
-	        if(mode == 1){
+	        if(memReplaceMode == MemFIFO){
 		    victim = fifo % 32;
 		}
 	        // LRU
-	        else if(mode == 2){
+	        else if(memReplaceMode == MemLRU){
 		    int min = pageTable[0].count;
 		    victim=0;
 		    for(int ccount=0;ccount<32;ccount++){
@@ -277,7 +277,7 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
 		kernel->machine->PhyPageName[victim]=pageTable[vpn].ID;
 		kernel->machine->main_tab[victim]=&pageTable[vpn];
 		
-		if(mode == 1)
+		if(memReplaceMode == MemFIFO)
 		    fifo = fifo + 1;	//for fifo
 		printf("page replacement finished\n"); 
 	    }
