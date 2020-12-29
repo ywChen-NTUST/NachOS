@@ -15,5 +15,5 @@ coff2noff
 #/code/test/*
 #/code/test/halt
 
-*/.gdb_history
-*/peda-session-nachos.txt
+userprog/.gdb_history
+userprog/peda-session-nachos.txt
