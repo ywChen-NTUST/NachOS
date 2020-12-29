@@ -73,7 +73,7 @@ AddrSpace::AddrSpace()
 	pageTable[i].readOnly = FALSE;  
 
 	pageTable[i].count = 0;	// for LRU
-    }
+    }/**/
     
     // zero out the entire address space
 //    bzero(kernel->machine->mainMemory, MemorySize);
@@ -128,7 +128,7 @@ AddrSpace::Load(char *fileName)
     size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
 			+ UserStackSize;	// we need to increase the size
 						// to leave room for the stack
-    numPages = divRoundUp(size, PageSize);
+    /**/numPages = divRoundUp(size, PageSize);
     //	cout << "number of pages of " << fileName<< " is "<<numPages<<endl;
     
     // hw4
@@ -149,7 +149,7 @@ AddrSpace::Load(char *fileName)
         pageTable[i].readOnly = false;
     }
 
-    size = numPages * PageSize;
+    size = numPages * PageSize;/**/
 
     ASSERT(numPages <= NumPhysPages);		// check we're not trying
 						// to run anything too big --
