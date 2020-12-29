@@ -22,6 +22,10 @@ UserProgKernel::UserProgKernel(int argc, char **argv)
 {
     debugUserProg = FALSE;
     execfileNum=0;
+
+    // hw4
+    memType = MemDefault;
+
     for(int i=0; i<10; i++) { // initialize
         setPri[i] = false;
     }

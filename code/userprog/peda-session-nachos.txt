@@ -1,6 +1,2 @@
-break ../machine/translate.cc:145
-break ../machine/translate.cc:243
-
-
-
+break ../machine/translate.cc:244
 
